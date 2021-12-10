@@ -9,6 +9,11 @@ public class Employee implements Comparable<Employee>{
     public Employee() {
     }
 
+    public Employee(int empID, int projectID) {
+        EmpID = empID;
+        ProjectID = projectID;
+    }
+
     public Employee(int empID, int projectID, LocalDate dateFrom, LocalDate dateTo) {
         EmpID = empID;
         ProjectID = projectID;
@@ -46,16 +51,24 @@ public class Employee implements Comparable<Employee>{
         return DateFrom;
     }
 
-    public void setDateFrom(LocalDate dateFrom) {
-        DateFrom = dateFrom;
-    }
+    public void setDateFrom(String dateFrom) {
+        if (dateFrom.equals("NULL")) {
+            this.DateFrom=LocalDate.now();
+        } else if (!dateFrom.equals("NULL")) {
+            this.DateFrom=LocalDate.parse(dateFrom);
+        }
 
+    }
     public LocalDate getDateTo() {
         return DateTo;
     }
 
-    public void setDateTo(LocalDate dateTo) {
-        DateTo = dateTo;
+    public void setDateTo(String dateTo) {
+        if (dateTo.equals("NULL")) {
+            this.DateTo=LocalDate.now();
+        } else if (!dateTo.equals("NULL")) {
+            this.DateTo=LocalDate.parse(dateTo);
+        }
     }
 
     @Override

@@ -6,33 +6,24 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class main {
     public static void main(String[] args) throws IOException {
-
-        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\panai\\OneDrive\\Desktop\\sirmaText.txt"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please enter input file path and name: ");
+        String path= reader.readLine();
+        BufferedReader br = new BufferedReader(new FileReader(path));
+//        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\panai\\OneDrive\\Desktop\\sirmaText.txt"));
         String s;
         ArrayList<Employee> employees = new ArrayList<>();
         while ((s = br.readLine()) != null) {
-
-            Employee employee = new Employee();
             String[] data = s.split(", ");
-            employee.setEmpID(Integer.parseInt(data[0]));
-            employee.setProjectID(Integer.parseInt(data[1]));
+            Employee employee = new Employee(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
+            employee.setDateFrom(data[2]);
+            employee.setDateTo(data[3]);
 
-            if (data[2].equals("NULL")) {
-                employee.setDateFrom(LocalDate.now());
-            } else if (!data[2].equals("NULL")) {
-                employee.setDateFrom(LocalDate.parse(data[2]));
-            }
-
-
-            if (data[3].equals("NULL")) {
-                employee.setDateTo(LocalDate.now());
-            } else if (!data[3].equals("NULL")) {
-                employee.setDateTo(LocalDate.parse(data[3]));
-            }
 
             employees.add(employee);
 
         }
+
 
         Collections.sort(employees);
 
@@ -59,6 +50,6 @@ public class main {
                                     e.getValue()));
                 });
 
-        
+
     }
 }
